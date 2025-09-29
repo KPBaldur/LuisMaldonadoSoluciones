@@ -493,259 +493,107 @@ if (prefersReducedMotion.matches) {
 }
 
 // Galería Modal
-const galleryCollections = {
-    construccion: [
-        {
-            title: "Casa Residencial Moderna",
-            description: "Construcción completa de casa residencial de 150m²",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#87CEEB"/>
-                <rect x="50" y="150" width="300" height="120" fill="#D3D3D3" stroke="#696969" stroke-width="2"/>
-                <polygon points="40,150 200,100 360,150" fill="#DC143C" stroke="#B22222" stroke-width="2"/>
-                <rect x="150" y="200" width="40" height="70" fill="#8B4513" stroke="#654321" stroke-width="2"/>
-                <rect x="80" y="170" width="35" height="30" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="285" y="170" width="35" height="30" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="0" y="270" width="400" height="30" fill="#228B22"/>
-            </svg>`
-        },
-        {
-            title: "Edificio Comercial",
-            description: "Construcción de edificio comercial de 3 pisos",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#87CEEB"/>
-                <rect x="100" y="80" width="200" height="190" fill="#D3D3D3" stroke="#696969" stroke-width="2"/>
-                <rect x="120" y="100" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="155" y="100" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="190" y="100" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="225" y="100" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="260" y="100" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="120" y="140" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="155" y="140" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="190" y="140" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="225" y="140" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="260" y="140" width="25" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
-                <rect x="180" y="220" width="40" height="50" fill="#8B4513" stroke="#654321" stroke-width="2"/>
-                <rect x="0" y="270" width="400" height="30" fill="#228B22"/>
-            </svg>`
-        },
-        {
-            title: "Ampliación de Vivienda",
-            description: "Ampliación y remodelación de vivienda existente",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#87CEEB"/>
-                <rect x="50" y="150" width="150" height="120" fill="#D3D3D3" stroke="#696969" stroke-width="2"/>
-                <rect x="200" y="130" width="150" height="140" fill="#E6E6FA" stroke="#9370DB" stroke-width="2"/>
-                <polygon points="40,150 125,110 210,150" fill="#DC143C" stroke="#B22222" stroke-width="2"/>
-                <polygon points="190,130 275,90 360,130" fill="#FF6347" stroke="#FF4500" stroke-width="2"/>
-                <rect x="100" y="200" width="30" height="70" fill="#8B4513" stroke="#654321" stroke-width="2"/>
-                <rect x="250" y="200" width="30" height="70" fill="#8B4513" stroke="#654321" stroke-width="2"/>
-                <rect x="0" y="270" width="400" height="30" fill="#228B22"/>
-            </svg>`
-        },
-        {
-            title: "Estructura de Concreto",
-            description: "Construcción de estructura de concreto armado",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#87CEEB"/>
-                <rect x="80" y="100" width="240" height="170" fill="#C0C0C0" stroke="#696969" stroke-width="3"/>
-                <rect x="100" y="120" width="20" height="150" fill="#A9A9A9"/>
-                <rect x="140" y="120" width="20" height="150" fill="#A9A9A9"/>
-                <rect x="180" y="120" width="20" height="150" fill="#A9A9A9"/>
-                <rect x="220" y="120" width="20" height="150" fill="#A9A9A9"/>
-                <rect x="260" y="120" width="20" height="150" fill="#A9A9A9"/>
-                <rect x="80" y="140" width="240" height="10" fill="#A9A9A9"/>
-                <rect x="80" y="180" width="240" height="10" fill="#A9A9A9"/>
-                <rect x="80" y="220" width="240" height="10" fill="#A9A9A9"/>
-                <rect x="0" y="270" width="400" height="30" fill="#228B22"/>
-            </svg>`
-        }
-    ],
-    plomeria: [
-        {
-            title: "Instalación de Baño Completo",
-            description: "Instalación completa de sistema de plomería para baño",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F0F8FF"/>
-                <rect x="50" y="50" width="300" height="200" fill="#E6E6FA" stroke="#9370DB" stroke-width="2"/>
-                <rect x="80" y="180" width="80" height="50" fill="#FFFFFF" stroke="#000" stroke-width="2"/>
-                <circle cx="120" cy="205" r="15" fill="#4169E1"/>
-                <rect x="200" y="80" width="60" height="100" fill="#FFFFFF" stroke="#000" stroke-width="2"/>
-                <rect x="210" y="90" width="40" height="80" fill="#E0F6FF"/>
-                <rect x="280" y="150" width="50" height="80" fill="#FFFFFF" stroke="#000" stroke-width="2"/>
-                <circle cx="305" cy="190" r="20" fill="#4169E1"/>
-                <line x1="120" y1="180" x2="120" y2="100" stroke="#4169E1" stroke-width="4"/>
-                <line x1="230" y1="80" x2="230" y2="50" stroke="#4169E1" stroke-width="4"/>
-                <line x1="305" y1="150" x2="305" y2="100" stroke="#4169E1" stroke-width="4"/>
-            </svg>`
-        },
-        {
-            title: "Sistema de Tuberías",
-            description: "Instalación de red de tuberías de agua potable",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F0F8FF"/>
-                <line x1="50" y1="150" x2="350" y2="150" stroke="#4169E1" stroke-width="8"/>
-                <line x1="150" y1="150" x2="150" y2="80" stroke="#4169E1" stroke-width="6"/>
-                <line x1="250" y1="150" x2="250" y2="220" stroke="#4169E1" stroke-width="6"/>
-                <line x1="150" y1="80" x2="200" y2="80" stroke="#4169E1" stroke-width="6"/>
-                <line x1="200" y1="220" x2="250" y2="220" stroke="#4169E1" stroke-width="6"/>
-                <circle cx="150" cy="150" r="8" fill="#FF6347"/>
-                <circle cx="250" cy="150" r="8" fill="#FF6347"/>
-                <circle cx="150" cy="80" r="6" fill="#32CD32"/>
-                <circle cx="250" cy="220" r="6" fill="#32CD32"/>
-                <rect x="180" y="70" width="40" height="20" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
-                <rect x="180" y="210" width="40" height="20" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
-            </svg>`
-        },
-        {
-            title: "Reparación de Fugas",
-            description: "Reparación y mantenimiento de tuberías con fugas",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F0F8FF"/>
-                <line x1="100" y1="150" x2="300" y2="150" stroke="#4169E1" stroke-width="10"/>
-                <rect x="190" y="140" width="20" height="20" fill="#FF0000"/>
-                <circle cx="200" cy="150" r="3" fill="#00BFFF" opacity="0.7"/>
-                <circle cx="205" cy="155" r="2" fill="#00BFFF" opacity="0.6"/>
-                <circle cx="195" cy="160" r="2" fill="#00BFFF" opacity="0.6"/>
-                <circle cx="200" cy="165" r="1" fill="#00BFFF" opacity="0.5"/>
-                <rect x="180" y="130" width="40" height="40" fill="none" stroke="#FF6347" stroke-width="3" stroke-dasharray="5,5"/>
-                <path d="M 170 120 Q 200 100 230 120" stroke="#32CD32" stroke-width="4" fill="none"/>
-                <circle cx="170" cy="120" r="5" fill="#32CD32"/>
-                <circle cx="230" cy="120" r="5" fill="#32CD32"/>
-            </svg>`
-        },
-        {
-            title: "Instalación de Calentador",
-            description: "Instalación de sistema de calentamiento de agua",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F0F8FF"/>
-                <rect x="150" y="80" width="100" height="140" fill="#C0C0C0" stroke="#696969" stroke-width="3"/>
-                <circle cx="200" cy="150" r="40" fill="#FF6347" stroke="#DC143C" stroke-width="2"/>
-                <circle cx="200" cy="150" r="25" fill="#FFD700"/>
-                <line x1="200" y1="125" x2="200" y2="175" stroke="#FF4500" stroke-width="3"/>
-                <line x1="175" y1="150" x2="225" y2="150" stroke="#FF4500" stroke-width="3"/>
-                <line x1="150" y1="100" x2="100" y2="100" stroke="#4169E1" stroke-width="6"/>
-                <line x1="250" y1="100" x2="300" y2="100" stroke="#FF0000" stroke-width="6"/>
-                <rect x="80" y="95" width="20" height="10" fill="#32CD32"/>
-                <rect x="300" y="95" width="20" height="10" fill="#FF6347"/>
-                <rect x="170" y="60" width="60" height="20" fill="#8B4513"/>
-            </svg>`
-        }
-    ],
-    acabados: [
-        {
-            title: "Pintura Interior",
-            description: "Acabados de pintura interior con técnicas modernas",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F5F5DC"/>
-                <rect x="50" y="50" width="300" height="200" fill="#FFFAF0" stroke="#D2B48C" stroke-width="2"/>
-                <rect x="70" y="70" width="80" height="160" fill="#FFE4E1"/>
-                <rect x="170" y="70" width="80" height="160" fill="#E0FFFF"/>
-                <rect x="270" y="70" width="60" height="160" fill="#F0FFF0"/>
-                <rect x="100" y="200" width="30" height="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
-                <rect x="200" y="200" width="30" height="30" fill="#FF69B4" stroke="#FF1493" stroke-width="2"/>
-                <rect x="300" y="200" width="20" height="30" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
-                <path d="M 80 90 Q 110 80 140 90" stroke="#FF6347" stroke-width="3" fill="none"/>
-                <path d="M 180 90 Q 210 80 240 90" stroke="#4169E1" stroke-width="3" fill="none"/>
-            </svg>`
-        },
-        {
-            title: "Instalación de Pisos",
-            description: "Instalación de pisos laminados y cerámicos",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F5F5DC"/>
-                <rect x="50" y="180" width="300" height="70" fill="#DEB887" stroke="#8B7355" stroke-width="2"/>
-                <line x1="50" y1="200" x2="350" y2="200" stroke="#8B7355" stroke-width="1"/>
-                <line x1="50" y1="220" x2="350" y2="220" stroke="#8B7355" stroke-width="1"/>
-                <line x1="50" y1="240" x2="350" y2="240" stroke="#8B7355" stroke-width="1"/>
-                <line x1="100" y1="180" x2="100" y2="250" stroke="#8B7355" stroke-width="1"/>
-                <line x1="150" y1="180" x2="150" y2="250" stroke="#8B7355" stroke-width="1"/>
-                <line x1="200" y1="180" x2="200" y2="250" stroke="#8B7355" stroke-width="1"/>
-                <line x1="250" y1="180" x2="250" y2="250" stroke="#8B7355" stroke-width="1"/>
-                <line x1="300" y1="180" x2="300" y2="250" stroke="#8B7355" stroke-width="1"/>
-                <rect x="150" y="100" width="100" height="80" fill="#D2B48C" stroke="#A0522D" stroke-width="2"/>
-                <circle cx="200" cy="140" r="30" fill="#CD853F"/>
-            </svg>`
-        },
-        {
-            title: "Acabados en Madera",
-            description: "Trabajos de carpintería y acabados en madera",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F5F5DC"/>
-                <rect x="80" y="80" width="240" height="140" fill="#DEB887" stroke="#8B7355" stroke-width="3"/>
-                <rect x="100" y="100" width="200" height="100" fill="#D2B48C"/>
-                <line x1="100" y1="120" x2="300" y2="120" stroke="#A0522D" stroke-width="2"/>
-                <line x1="100" y1="140" x2="300" y2="140" stroke="#A0522D" stroke-width="2"/>
-                <line x1="100" y1="160" x2="300" y2="160" stroke="#A0522D" stroke-width="2"/>
-                <line x1="100" y1="180" x2="300" y2="180" stroke="#A0522D" stroke-width="2"/>
-                <rect x="180" y="130" width="40" height="40" fill="#8B4513" stroke="#654321" stroke-width="2"/>
-                <circle cx="200" cy="150" r="5" fill="#FFD700"/>
-                <rect x="120" y="240" width="160" height="20" fill="#8B4513"/>
-                <rect x="130" y="245" width="20" height="10" fill="#A0522D"/>
-                <rect x="170" y="245" width="20" height="10" fill="#A0522D"/>
-                <rect x="210" y="245" width="20" height="10" fill="#A0522D"/>
-                <rect x="250" y="245" width="20" height="10" fill="#A0522D"/>
-            </svg>`
-        },
-        {
-            title: "Decoración y Detalles",
-            description: "Acabados decorativos y detalles finales",
-            svg: `<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#F5F5DC"/>
-                <rect x="50" y="50" width="300" height="200" fill="#FFFAF0" stroke="#D2B48C" stroke-width="2"/>
-                <rect x="100" y="80" width="60" height="80" fill="#FFE4E1" stroke="#FF69B4" stroke-width="2"/>
-                <rect x="240" y="80" width="60" height="80" fill="#E0FFFF" stroke="#4169E1" stroke-width="2"/>
-                <circle cx="130" cy="120" r="20" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
-                <polygon points="130,105 135,115 145,115 137,122 140,132 130,127 120,132 123,122 115,115 125,115" fill="#FF6347"/>
-                <circle cx="270" cy="120" r="20" fill="#98FB98" stroke="#32CD32" stroke-width="2"/>
-                <rect x="265" y="115" width="10" height="10" fill="#FF1493"/>
-                <rect x="150" y="180" width="100" height="50" fill="#DDA0DD" stroke="#9370DB" stroke-width="2"/>
-                <line x1="160" y1="190" x2="240" y2="190" stroke="#8B008B" stroke-width="2"/>
-                <line x1="160" y1="200" x2="240" y2="200" stroke="#8B008B" stroke-width="2"/>
-                <line x1="160" y1="210" x2="240" y2="210" stroke="#8B008B" stroke-width="2"/>
-                <line x1="160" y1="220" x2="240" y2="220" stroke="#8B008B" stroke-width="2"/>
-            </svg>`
-        }
-    ]
-};
+// Configuración de la galería - se carga desde JSON
+let galleryConfig = null;
+let galleryCollections = {};
 
 let currentCollection = [];
 let currentImageIndex = 0;
 
 // Inicializar modal de galería
+// Función para cargar la configuración de la galería
+async function loadGalleryConfig() {
+    try {
+        const response = await fetch('./data/gallery-config.json');
+        if (!response.ok) {
+            throw new Error('No se pudo cargar la configuración de la galería');
+        }
+        galleryConfig = await response.json();
+        
+        // Procesar la configuración para crear las colecciones por proyecto
+        galleryCollections = {};
+        
+        // Verificar que projects sea un array
+        if (Array.isArray(galleryConfig.projects)) {
+            for (const project of galleryConfig.projects) {
+                galleryCollections[project.id] = [];
+                
+                // Verificar que el proyecto tenga imágenes
+                if (Array.isArray(project.images)) {
+                    for (const image of project.images) {
+                        galleryCollections[project.id].push({
+                            title: project.name,
+                            description: project.description,
+                            location: project.location,
+                            date: project.date,
+                            imageSrc: `./img/galeria/${project.folder}/${image.filename}`,
+                            alt: image.alt,
+                            isMain: image.isMain || false
+                        });
+                    }
+                }
+            }
+        }
+        
+        console.log('Configuración de galería cargada:', galleryCollections);
+    } catch (error) {
+        console.error('Error al cargar la configuración de la galería:', error);
+        // Fallback: crear colecciones vacías
+        galleryCollections = {};
+    }
+}
+
 function initGalleryModal() {
     const modal = document.getElementById('galleryModal');
-    const closeBtn = document.querySelector('.close');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const galleryItems = document.querySelectorAll('.galeria-item');
+    if (!modal) return;
 
-    // Abrir modal al hacer clic en elementos de galería
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const category = item.getAttribute('data-category');
-            openGalleryModal(category);
+    // Cargar configuración antes de inicializar
+    loadGalleryConfig().then(() => {
+        const closeBtn = document.querySelector('.modal-close');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const galleryItems = document.querySelectorAll('.galeria-item');
+
+        // Abrir modal al hacer clic en elementos de galería
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const projectId = item.getAttribute('data-project');
+                if (projectId && galleryCollections[projectId] && galleryCollections[projectId].length > 0) {
+                    openGalleryModal(projectId);
+                } else {
+                    console.warn(`No hay imágenes disponibles para el proyecto: ${projectId}`);
+                }
+            });
         });
-    });
 
-    // Cerrar modal
-    closeBtn.addEventListener('click', closeGalleryModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeGalleryModal();
+        // Cerrar modal
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeGalleryModal);
         }
-    });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeGalleryModal();
+            }
+        });
 
-    // Navegación
-    prevBtn.addEventListener('click', showPreviousImage);
-    nextBtn.addEventListener('click', showNextImage);
-
-    // Navegación con teclado
-    document.addEventListener('keydown', (e) => {
-        if (modal.style.display === 'block') {
-            if (e.key === 'ArrowLeft') showPreviousImage();
-            if (e.key === 'ArrowRight') showNextImage();
-            if (e.key === 'Escape') closeGalleryModal();
+        // Navegación
+        if (prevBtn) {
+            prevBtn.addEventListener('click', showPreviousImage);
         }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', showNextImage);
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'block') {
+                if (e.key === 'ArrowLeft') showPreviousImage();
+                if (e.key === 'ArrowRight') showNextImage();
+                if (e.key === 'Escape') closeGalleryModal();
+            }
+        });
+    }).catch(error => {
+        console.error('Error al inicializar la galería:', error);
     });
 }
 
@@ -766,20 +614,19 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🏗️ Construcciones Erick - Página web cargada correctamente');
 });
 
-function openGalleryModal(category) {
+function openGalleryModal(projectId) {
     const modal = document.getElementById('galleryModal');
     const modalTitle = document.getElementById('modalTitle');
     
-    currentCollection = galleryCollections[category] || [];
+    currentCollection = galleryCollections[projectId] || [];
     currentImageIndex = 0;
 
-    // Configurar título
-    const titles = {
-        construccion: 'Proyectos de Construcción',
-        plomeria: 'Proyectos de Plomería',
-        acabados: 'Proyectos de Acabados'
-    };
-    modalTitle.textContent = titles[category] || 'Galería de Proyectos';
+    // Configurar título con el nombre del proyecto
+    if (currentCollection.length > 0) {
+        modalTitle.textContent = currentCollection[0].title;
+    } else {
+        modalTitle.textContent = 'Galería de Proyectos';
+    }
 
     // Mostrar modal
     modal.style.display = 'block';
@@ -798,42 +645,63 @@ function closeGalleryModal() {
 
 function loadModalImages() {
     const thumbnailsContainer = document.getElementById('modalThumbnails');
+    if (!thumbnailsContainer) return;
+    
     thumbnailsContainer.innerHTML = '';
-
-    currentCollection.forEach((image, index) => {
+    
+    currentCollection.forEach((item, index) => {
         const thumbnail = document.createElement('div');
-        thumbnail.className = 'thumbnail';
-        thumbnail.innerHTML = image.svg;
+        thumbnail.className = 'modal-thumbnail';
+        if (index === currentImageIndex) {
+            thumbnail.classList.add('active');
+        }
+        
+        const img = document.createElement('img');
+        img.src = item.imageSrc;
+        img.alt = item.alt;
+        img.loading = 'lazy';
+        
+        thumbnail.appendChild(img);
         thumbnail.addEventListener('click', () => {
             currentImageIndex = index;
             showCurrentImage();
         });
+        
         thumbnailsContainer.appendChild(thumbnail);
     });
 }
 
 function showCurrentImage() {
-    if (currentCollection.length === 0) return;
-
+    if (!currentCollection.length) return;
+    
+    const currentItem = currentCollection[currentImageIndex];
     const modalImage = document.getElementById('modalImage');
-    const imageTitle = document.getElementById('imageTitle');
-    const imageDescription = document.getElementById('imageDescription');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const thumbnails = document.querySelectorAll('.thumbnail');
-
-    const currentImage = currentCollection[currentImageIndex];
-
-    // Actualizar imagen principal
-    modalImage.innerHTML = currentImage.svg;
-    imageTitle.textContent = currentImage.title;
-    imageDescription.textContent = currentImage.description;
-
-    // Actualizar botones de navegación
-    prevBtn.disabled = currentImageIndex === 0;
-    nextBtn.disabled = currentImageIndex === currentCollection.length - 1;
-
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalInfo = document.getElementById('modalInfo');
+    
+    if (modalImage) {
+        modalImage.src = currentItem.imageSrc;
+        modalImage.alt = currentItem.alt;
+    }
+    
+    if (modalTitle) {
+        modalTitle.textContent = currentItem.title;
+    }
+    
+    if (modalDescription) {
+        modalDescription.textContent = currentItem.description;
+    }
+    
+    if (modalInfo) {
+        modalInfo.innerHTML = `
+            <p><strong>Ubicación:</strong> ${currentItem.location || 'No especificada'}</p>
+            <p><strong>Fecha:</strong> ${currentItem.date || 'No especificada'}</p>
+        `;
+    }
+    
     // Actualizar thumbnails activos
+    const thumbnails = document.querySelectorAll('.modal-thumbnail');
     thumbnails.forEach((thumb, index) => {
         thumb.classList.toggle('active', index === currentImageIndex);
     });

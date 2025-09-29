@@ -1,0 +1,92 @@
+{
+  "projects": [
+    {
+      "id": "cobertizo-residencial",
+      "name": "Cobertizo Residencial",
+      "description": "Construcción de cobertizo para área residencial con estructura metálica y acabados de calidad",
+      "category": "Construcción",
+      "location": "Proyecto Residencial",
+      "date": "2024",
+      "folder": "Covertiso",
+      "images": [
+        {
+          "filename": "Cobertiso.jpeg",
+          "alt": "Vista principal del cobertizo",
+          "isMain": true
+        },
+        {
+          "filename": "Cobertiso02.jpeg",
+          "alt": "Proceso de construcción del cobertizo"
+        },
+        {
+          "filename": "Cobertiso03.jpeg",
+          "alt": "Detalles estructurales"
+        },
+        {
+          "filename": "Cobertiso04.jpg",
+          "alt": "Vista lateral del proyecto"
+        },
+        {
+          "filename": "Cobertiso05.jpeg",
+          "alt": "Acabados del cobertizo"
+        },
+        {
+          "filename": "Cobertiso06.jpeg",
+          "alt": "Vista completa terminada"
+        },
+        {
+          "filename": "Cobertiso07.jpeg",
+          "alt": "Detalles finales del proyecto"
+        }
+      ]
+    },
+    {
+      "id": "camino-grava",
+      "name": "Camino de Grava",
+      "description": "Construcción de camino empedrado con grava compactada y drenaje adecuado",
+      "category": "Construcción",
+      "location": "Acceso Vehicular",
+      "date": "2024",
+      "folder": "CaminoGrava",
+      "images": [
+        {
+          "filename": "CaminoGrava.jpeg",
+          "alt": "Vista principal del camino de grava",
+          "isMain": true
+        },
+        {
+          "filename": "CaminoGrava02.jpeg",
+          "alt": "Proceso de preparación del terreno"
+        },
+        {
+          "filename": "CaminoGrava03.jpeg",
+          "alt": "Colocación de base de grava"
+        },
+        {
+          "filename": "CaminoGrava04.jpeg",
+          "alt": "Compactación del material"
+        },
+        {
+          "filename": "CaminoGrava05.jpeg",
+          "alt": "Detalles del acabado"
+        },
+        {
+          "filename": "CaminoGrava06.jpeg",
+          "alt": "Vista lateral del camino"
+        },
+        {
+          "filename": "CaminoGrava07.jpeg",
+          "alt": "Drenaje y acabados laterales"
+        },
+        {
+          "filename": "CaminoGrava08.jpeg",
+          "alt": "Vista completa del proyecto"
+        },
+        {
+          "filename": "CaminoGrava09.jpeg",
+          "alt": "Resultado final del camino"
+        }
+      ]
+    }
+  ]
+}
