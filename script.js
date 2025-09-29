@@ -545,7 +545,10 @@ async function loadGalleryConfig() {
 
 function initGalleryModal() {
     const modal = document.getElementById('galleryModal');
-    if (!modal) return;
+    if (!modal) {
+        console.warn('Modal de galería no encontrado');
+        return;
+    }
 
     // Cargar configuración antes de inicializar
     loadGalleryConfig().then(() => {
@@ -554,39 +557,56 @@ function initGalleryModal() {
         const nextBtn = document.getElementById('nextBtn');
         const galleryItems = document.querySelectorAll('.galeria-item');
 
+        if (galleryItems.length === 0) {
+            console.warn('No se encontraron elementos de galería');
+            return;
+        }
+
         // Abrir modal al hacer clic en elementos de galería
         galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const projectId = item.getAttribute('data-project');
-                if (projectId && galleryCollections[projectId] && galleryCollections[projectId].length > 0) {
-                    openGalleryModal(projectId);
-                } else {
-                    console.warn(`No hay imágenes disponibles para el proyecto: ${projectId}`);
-                }
-            });
+            if (item) {
+                item.addEventListener('click', () => {
+                    const projectId = item.getAttribute('data-project');
+                    if (projectId && galleryCollections[projectId] && galleryCollections[projectId].length > 0) {
+                        openGalleryModal(projectId);
+                    } else {
+                        console.warn(`No hay imágenes disponibles para el proyecto: ${projectId}`);
+                    }
+                });
+            }
         });
 
         // Cerrar modal
         if (closeBtn) {
             closeBtn.addEventListener('click', closeGalleryModal);
+        } else {
+            console.warn('Botón de cerrar modal no encontrado');
         }
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeGalleryModal();
-            }
-        });
+        
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeGalleryModal();
+                }
+            });
+        }
 
         // Navegación
         if (prevBtn) {
             prevBtn.addEventListener('click', showPreviousImage);
+        } else {
+            console.warn('Botón anterior no encontrado');
         }
+        
         if (nextBtn) {
             nextBtn.addEventListener('click', showNextImage);
+        } else {
+            console.warn('Botón siguiente no encontrado');
         }
 
         // Navegación con teclado
         document.addEventListener('keydown', (e) => {
-            if (modal.style.display === 'block') {
+            if (modal && modal.style.display === 'block') {
                 if (e.key === 'ArrowLeft') showPreviousImage();
                 if (e.key === 'ArrowRight') showNextImage();
                 if (e.key === 'Escape') closeGalleryModal();
