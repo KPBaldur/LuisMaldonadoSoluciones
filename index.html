@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construcciones Erick - Soluciones Integrales</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-hammer"></i> Construcciones Erick</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#servicios" class="nav-link">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#galeria" class="nav-link">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Home -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Soluciones Integrales en Construcción</h1>
+                <p>Especialistas en construcción, gafitería y terminaciones de alta calidad. Transformamos tus ideas en realidad con más de 10 años de experiencia.</p>
+                <div class="hero-buttons">
+                    <a href="#servicios" class="btn btn-primary">Nuestros Servicios</a>
+                    <a href="#contacto" class="btn btn-secondary">Contactar</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="hero-image.jpg" alt="Construcciones Erick - Proyectos de construcción" class="hero-img">
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <h3>100+</h3>
+                <p>Proyectos Completados</p>
+            </div>
+            <div class="stat">
+                <h3>10+</h3>
+                <p>Años de Experiencia</p>
+            </div>
+            <div class="stat">
+                <h3>98%</h3>
+                <p>Clientes Satisfechos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Galería -->
+    <div id="galleryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Galería de Proyectos</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <button class="nav-btn prev-btn" id="prevBtn">&#8249;</button>
+                    <div class="modal-image-container">
+                        <div class="modal-image" id="modalImage"></div>
+                        <div class="image-info">
+                            <h4 id="imageTitle">Título del Proyecto</h4>
+                            <p id="imageDescription">Descripción del proyecto</p>
+                        </div>
+                    </div>
+                    <button class="nav-btn next-btn" id="nextBtn">&#8250;</button>
+                </div>
+                <div class="modal-thumbnails" id="modalThumbnails">
+                    <!-- Thumbnails se generarán dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="servicios">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos soluciones completas para todos tus proyectos de construcción</p>
+            </div>
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Construcción</h3>
+                    <p>Construcción de viviendas, edificios comerciales y proyectos residenciales desde cimientos hasta acabados finales.</p>
+                    <ul>
+                        <li>Construcción de casas</li>
+                        <li>Edificios comerciales</li>
+                        <li>Remodelaciones</li>
+                        <li>Ampliaciones</li>
+                    </ul>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Gafitería</h3>
+                    <p>Instalación y reparación de sistemas de plomería, agua potable, desagües y sistemas de gas.</p>
+                    <ul>
+                        <li>Instalación de tuberías</li>
+                        <li>Reparación de fugas</li>
+                        <li>Sistemas de gas</li>
+                        <li>Mantenimiento preventivo</li>
+                    </ul>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3>Terminaciones</h3>
+                    <p>Acabados de alta calidad incluyendo pintura, pisos, revestimientos y detalles decorativos.</p>
+                    <ul>
+                        <li>Pintura interior y exterior</li>
+                        <li>Instalación de pisos</li>
+                        <li>Revestimientos</li>
+                        <li>Detalles decorativos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Galería -->
+    <section id="galeria" class="galeria">
+        <div class="container">
+            <div class="section-header">
+                <h2>Galería de Trabajos</h2>
+                <p>Algunos de nuestros proyectos más destacados</p>
+            </div>
+            <div class="galeria-grid">
+                <div class="galeria-item" data-category="construccion">
+                    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="300" height="200" fill="#f8f9fa"/>
+                        <rect x="50" y="80" width="200" height="80" fill="#e9ecef" stroke="#6c757d"/>
+                        <polygon points="40,80 150,40 260,80" fill="#dc3545"/>
+                        <rect x="120" y="120" width="30" height="40" fill="#495057"/>
+                        <rect x="80" y="100" width="25" height="20" fill="#17a2b8"/>
+                        <rect x="195" y="100" width="25" height="20" fill="#17a2b8"/>
+                        <text x="150" y="190" text-anchor="middle" fill="#6c757d" font-size="12">Casa Residencial</text>
+                    </svg>
+                    <div class="galeria-overlay">
+                        <h4>Construcción</h4>
+                        <p>Ver proyectos de construcción</p>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="plomeria">
+                    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="300" height="200" fill="#f8f9fa"/>
+                        <rect x="30" y="40" width="240" height="120" fill="#e9ecef" stroke="#6c757d"/>
+                        <rect x="50" y="60" width="200" height="80" fill="#fff3cd" stroke="#856404"/>
+                        <circle cx="80" cy="100" r="15" fill="#007bff"/>
+                        <circle cx="150" cy="100" r="15" fill="#007bff"/>
+                        <circle cx="220" cy="100" r="15" fill="#007bff"/>
+                        <text x="150" y="190" text-anchor="middle" fill="#6c757d" font-size="12">Sistema de Plomería</text>
+                    </svg>
+                    <div class="galeria-overlay">
+                        <h4>Plomería</h4>
+                        <p>Ver proyectos de plomería</p>
+                    </div>
+                </div>
+                <div class="galeria-item" data-category="acabados">
+                    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="300" height="200" fill="#f8f9fa"/>
+                        <rect x="50" y="60" width="200" height="80" fill="#e9ecef" stroke="#6c757d"/>
+                        <rect x="70" y="80" width="160" height="40" fill="#d4edda" stroke="#155724"/>
+                        <line x1="90" y1="100" x2="230" y2="100" stroke="#28a745" stroke-width="2"/>
+                        <line x1="90" y1="110" x2="230" y2="110" stroke="#28a745" stroke-width="2"/>
+                        <line x1="90" y1="120" x2="230" y2="120" stroke="#28a745" stroke-width="2"/>
+                        <text x="150" y="190" text-anchor="middle" fill="#6c757d" font-size="12">Instalación de Pisos</text>
+                    </svg>
+                    <div class="galeria-overlay">
+                        <h4>Acabados</h4>
+                        <p>Ver proyectos de acabados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="contacto">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contáctanos</h2>
+                <p>¿Tienes un proyecto en mente? Hablemos y hagámoslo realidad</p>
+            </div>
+            <div class="contacto-content">
+                <div class="contacto-info">
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p>+57 300 123 4567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@construccioneserick.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Ubicación</h4>
+                            <p>Bogotá, Colombia</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+57 300 123 4567</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contacto-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Tu email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="telefono" name="telefono" placeholder="Tu teléfono" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="servicio" name="servicio" required>
+                            <option value="">Selecciona un servicio</option>
+                            <option value="construccion">Construcción</option>
+                            <option value="gafiteria">Gafitería</option>
+                            <option value="terminaciones">Terminaciones</option>
+                            <option value="remodelacion">Remodelación</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto" rows="5" required></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Enviar Email
+                        </button>
+                        <button type="button" class="btn btn-whatsapp" id="whatsappBtn">
+                            <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-hammer"></i> Construcciones Erick</h3>
+                    <p>Soluciones integrales en construcción, gafitería y terminaciones con más de 10 años de experiencia.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li>Construcción</li>
+                        <li>Gafitería</li>
+                        <li>Terminaciones</li>
+                        <li>Remodelaciones</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +57 300 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> info@construccioneserick.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Construcciones Erick. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

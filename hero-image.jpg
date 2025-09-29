@@ -1,0 +1,97 @@
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo de cielo -->
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="buildingGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D3D3D3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A9A9A9;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="brickPattern" patternUnits="userSpaceOnUse" width="20" height="10">
+      <rect width="20" height="10" fill="#CD853F"/>
+      <rect x="0" y="0" width="10" height="5" fill="#DEB887"/>
+      <rect x="10" y="5" width="10" height="5" fill="#DEB887"/>
+    </pattern>
+  </defs>
+  
+  <!-- Cielo -->
+  <rect width="500" height="200" fill="url(#skyGradient)"/>
+  
+  <!-- Suelo -->
+  <rect x="0" y="200" width="500" height="200" fill="#8FBC8F"/>
+  
+  <!-- Edificio principal -->
+  <rect x="150" y="100" width="200" height="200" fill="url(#buildingGradient)" stroke="#696969" stroke-width="2"/>
+  
+  <!-- Ventanas del edificio -->
+  <rect x="170" y="120" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="210" y="120" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="250" y="120" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="290" y="120" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <rect x="170" y="180" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="210" y="180" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="250" y="180" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="290" y="180" width="30" height="40" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <!-- Entrada del edificio -->
+  <rect x="220" y="240" width="60" height="60" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Grúa de construcción -->
+  <rect x="380" y="50" width="8" height="250" fill="#FF6347"/>
+  <rect x="350" y="50" width="80" height="8" fill="#FF6347"/>
+  <rect x="350" y="58" width="8" height="20" fill="#FF6347"/>
+  
+  <!-- Cable de la grúa -->
+  <line x1="350" y1="58" x2="320" y2="150" stroke="#000" stroke-width="2"/>
+  
+  <!-- Carga de la grúa -->
+  <rect x="310" y="150" width="20" height="20" fill="#8B4513"/>
+  
+  <!-- Casa en construcción (izquierda) -->
+  <rect x="50" y="150" width="80" height="100" fill="url(#brickPattern)" stroke="#8B4513" stroke-width="2"/>
+  
+  <!-- Techo en construcción -->
+  <polygon points="40,150 90,120 140,150" fill="#DC143C" stroke="#B22222" stroke-width="2"/>
+  
+  <!-- Andamios -->
+  <rect x="30" y="120" width="4" height="130" fill="#C0C0C0"/>
+  <rect x="146" y="120" width="4" height="130" fill="#C0C0C0"/>
+  <rect x="30" y="140" width="120" height="4" fill="#C0C0C0"/>
+  <rect x="30" y="180" width="120" height="4" fill="#C0C0C0"/>
+  <rect x="30" y="220" width="120" height="4" fill="#C0C0C0"/>
+  
+  <!-- Trabajadores (figuras simples) -->
+  <circle cx="70" cy="240" r="8" fill="#FDBCB4"/>
+  <rect x="66" y="248" width="8" height="20" fill="#FF6347"/>
+  <rect x="64" y="268" width="4" height="15" fill="#000080"/>
+  <rect x="72" y="268" width="4" height="15" fill="#000080"/>
+  
+  <circle cx="300" cy="290" r="8" fill="#FDBCB4"/>
+  <rect x="296" y="298" width="8" height="20" fill="#32CD32"/>
+  <rect x="294" y="318" width="4" height="15" fill="#000080"/>
+  <rect x="302" y="318" width="4" height="15" fill="#000080"/>
+  
+  <!-- Herramientas en el suelo -->
+  <rect x="100" y="280" width="20" height="4" fill="#8B4513"/>
+  <circle cx="110" cy="276" r="6" fill="#FFD700"/>
+  
+  <!-- Materiales de construcción -->
+  <rect x="400" y="270" width="30" height="30" fill="#8B4513"/>
+  <rect x="440" y="270" width="30" height="30" fill="#8B4513"/>
+  <rect x="420" y="240" width="30" height="30" fill="#8B4513"/>
+  
+  <!-- Nubes -->
+  <circle cx="100" cy="50" r="20" fill="white" opacity="0.8"/>
+  <circle cx="120" cy="45" r="25" fill="white" opacity="0.8"/>
+  <circle cx="140" cy="50" r="20" fill="white" opacity="0.8"/>
+  
+  <circle cx="350" cy="30" r="15" fill="white" opacity="0.8"/>
+  <circle cx="365" cy="25" r="20" fill="white" opacity="0.8"/>
+  <circle cx="380" cy="30" r="15" fill="white" opacity="0.8"/>
+  
+  <!-- Texto de marca de agua -->
+  <text x="250" y="390" text-anchor="middle" fill="#696969" font-size="12" opacity="0.7">Construcciones Erick - Imagen Temporal</text>
+</svg>
