@@ -1,6 +1,70 @@
 {
   "projects": [
     {
+      "id": "Area-Comun-Fogon-Columpio",
+      "name": "Area Comun Fogon Columpio",
+      "description": "Area comun con fogon y columpio",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "AreaComunFogonyColumpio",
+      "images": [
+        {
+          "filename": "AreaComunFogonyColumpio.jpg",
+          "alt": "Vista principal de la area comun con fogon.",
+          "isMain": true
+        },
+        {
+          "filename": "AreaComunFogonyColumpio02.jpg",
+          "alt": "Area de fogon con bancas."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio03.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio04.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio05.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio06.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio07.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio08.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio09.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio10.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio11.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio12.jpeg",
+          "alt": "Area de columpio."
+        },
+        {
+          "filename": "AreaComunFogonyColumpio13.jpeg",
+          "alt": "Area de columpio."
+        }
+      ]
+    },
+    {
       "id": "cobertizo-residencial",
       "name": "Cobertizo Residencial",
       "description": "Construcción de cobertizo para área residencial con estructura metálica y acabados de calidad",
@@ -85,6 +149,206 @@
         {
           "filename": "CaminoGrava09.jpeg",
           "alt": "Resultado final del camino"
+        }
+      ]
+    },
+    {
+      "id": "arreglo-techumbre",
+      "name": "Arreglo de Techumbre",
+      "description": "Reparación y arreglo de techumbre en viviendas",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "ArregloTechumbre",
+      "images": [
+        {
+          "filename": "ReparacionTechumbre.jpeg",
+          "alt": "Vista principal del arreglo de techumbre",
+          "isMain": true
+        },
+        {
+          "filename": "ReparacionTechumbre02.jpeg",
+          "alt": "Proceso de reparación de techumbre"
+        },
+        {
+          "filename": "ReparacionTechumbre03.jpeg",
+          "alt": "Colocación de techumbre"  
+        },
+        {
+          "filename": "ReparacionTechumbre04.jpeg",
+          "alt": "Compactación del material"
+        },
+        {
+          "filename": "ReparacionTechumbre05.jpeg",
+          "alt": "Detalles del acabado"
+        },
+        {
+          "filename": "ReparacionTechumbre06.jpeg", 
+          "alt": "Vista lateral del arreglo"    
+        }
+      ]
+    },
+    {
+      "id": "paneles-solares-y-techo",
+      "name": "Arreglo de Techumbre e Instalacion Paneles Solares",
+      "description": "Reparación y arreglo de techumbre en viviendas junto con instalacion de Paneles Solares.",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "PanelesSolaresyTecho",
+      "images": [
+        {
+          "filename": "PanelesSolaresyTecho.jpeg",
+          "alt": "Vista principal del arreglo de techumbre",
+          "isMain": true
+        },
+        {
+          "filename": "PanelesSolaresyTecho02.jpeg",
+          "alt": "Proceso de reparación de techumbre"
+        },
+        {
+          "filename": "PanelesSolaresyTecho03.jpeg",
+          "alt": "Colocación de techumbre"  
+        },
+        {
+          "filename": "PanelesSolaresyTecho04.jpeg",
+          "alt": "Compactación del material"
+        },
+        {
+          "filename": "PanelesSolaresyTecho05.jpeg",
+          "alt": "Detalles del acabado"
+        },
+        {
+          "filename": "PanelesSolaresyTecho06.jpeg",
+          "alt": "Vista lateral del arreglo"    
+        }
+      ]
+    },
+    {
+      "id": "arreglo-techumbre03",
+      "name": "Arreglo de Techumbre e Instalacion Paneles Solares",
+      "description": "Reparación y arreglo de techumbre en viviendas.",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "ArregloTechumbre03",
+      "images": [
+        {
+          "filename": "ArregloTechumbre.jpeg",
+          "alt": "Vista principal del arreglo de techumbre",
+          "isMain": true
+        },
+        {
+          "filename": "ArregloTechumbre02.jpeg",
+          "alt": "Proceso de reparación de techumbre"
+        }
+      ]
+    },
+    {
+      "id": "construccion-torre-de-agua",
+      "name": "Construccion Torre de Agua",
+      "description": "Construcción de torre de agua en viviendas junto con instalacion de calefont e incluye conexion directa de agua a domicilio.",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "InstalacionTorredeAgua",
+      "images": [
+        {
+          "filename": "InstalacionTorredeAgua.jpeg",
+          "alt": "Vista principal de la instalacion de torre de agua",
+          "isMain": true
+        },
+        {
+          "filename": "InstalacionTorredeAgua02.jpeg",
+          "alt": "Proceso de instalacion de torre de agua"
+        },
+        {
+          "filename": "InstalacionTorredeAgua03.jpeg",
+          "alt": "Proceso de instalacion de calefont"
+        },
+        {
+          "filename": "InstalacionTorredeAgua04.jpeg",
+          "alt": "Proceso de instalacion de calefont"
+        }
+      ]
+    },
+    {
+      "id": "instalacion-bomba-de-agua",
+      "name": "Instalacion Bonba de Agua",
+      "description": "Instalación de Bomba de agua en sistema de agua para domicilio.",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "InstalacionBombadeAgua",
+      "images": [
+        {
+          "filename": "InstalacionBomba.jpeg",
+          "alt": "Vista principal de la instalacion de bomba de agua",
+          "isMain": true
+        },
+        {
+          "filename": "02InstalacionBomba.jpeg",
+          "alt": "Proceso de instalacion de bomba de agua"
+        }
+      ]
+    },
+    {
+      "id": "instalacion-Calefont",
+      "name": "Instalacion Calefont",
+      "description": "Instalación de Calefont en sistema de agua para domicilio, junto con proteccion para exterior.",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "InstalacionCalefont",
+      "images": [
+        {
+          "filename": "InstalacionCalefont.jpeg",
+          "alt": "Vista principal de la instalacion de calefont",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "id": "instalacion-Cocina",
+      "name": "Instalacion Cocina a Cañeria",
+      "description": "Instalación de Cocina a Cañeria en sistema de gas para domicilio.",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "InstalacionCocinaaCañeria",
+      "images": [
+        {
+          "filename": "InstalacionCocinaaCañeria.jpeg",
+          "alt": "Vista principal de la instalacion de cocina a cañeria",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "id": "construccion-torre-de-agua-02",
+      "name": "Construccion Torre de Agua",
+      "description": "Construcción de torre de agua en viviendas junto con instalacion de calefont e incluye conexion directa de agua a domicilio.",
+      "category": "Construcción",
+      "location": "Hogar residencial",
+      "date": "2025",
+      "folder": "ConstruccionTorredeAgua02",
+      "images": [
+        {
+          "filename": "TorredeAgua.jpeg",
+          "alt": "Vista principal de la instalacion de torre de agua",
+          "isMain": true
+        },
+        {
+          "filename": "TorredeAgua02.jpeg",
+          "alt": "Proceso de instalacion de torre de agua"
+        },
+        {
+          "filename": "TorredeAgua03.jpeg",
+          "alt": "Proceso de instalacion de calefont"
+        },
+        {
+          "filename": "TorredeAgua04.jpeg",
+          "alt": "Proceso de instalacion de calefont"
         }
       ]
     }

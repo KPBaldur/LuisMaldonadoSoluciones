@@ -71,7 +71,7 @@ function initScrollEffects() {
         });
     }, observerOptions);
 
-    // Observar elementos para animaciones
+    // Observer para animaciones
     document.querySelectorAll('.servicio-card, .galeria-item, .info-item').forEach(el => {
         observer.observe(el);
     });
@@ -201,7 +201,7 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
-// Observar elementos para animaciones
+// Observer para animaciones
 document.querySelectorAll('.servicio-card, .galeria-item, .info-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -216,55 +216,162 @@ const whatsappBtn = document.getElementById('whatsappBtn');
 // Funciones auxiliares para el formulario de contacto
 function getFormData() {
     return {
-        nombre: document.getElementById('nombre').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        telefono: document.getElementById('telefono').value.trim(),
-        mensaje: document.getElementById('mensaje').value.trim()
+        nombre: sanitizeInput(document.getElementById('nombre').value.trim()),
+        email: sanitizeInput(document.getElementById('email').value.trim()),
+        telefono: sanitizeInput(document.getElementById('telefono').value.trim()),
+        servicio: sanitizeInput(document.getElementById('servicio').value),
+        mensaje: sanitizeInput(document.getElementById('mensaje').value.trim())
     };
 }
 
+// Función para sanitizar inputs y prevenir XSS
+function sanitizeInput(input) {
+    if (typeof input !== 'string') return '';
+    
+    return input
+        .replace(/[<>]/g, '') // Remover < y >
+        .replace(/javascript:/gi, '') // Remover javascript:
+        .replace(/on\w+=/gi, '') // Remover event handlers
+        .replace(/script/gi, '') // Remover script tags
+        .trim();
+}
+
 function validateForm(data) {
-    if (!data.nombre) {
-        return { isValid: false, message: 'Por favor, ingresa tu nombre.' };
+    const errors = [];
+    
+    // Validar nombre
+    if (!data.nombre || data.nombre.length < 2) {
+        errors.push('El nombre debe tener al menos 2 caracteres.');
+    }
+    if (data.nombre.length > 50) {
+        errors.push('El nombre no puede exceder 50 caracteres.');
     }
     
+    // Validar email
     if (!data.email || !isValidEmail(data.email)) {
-        return { isValid: false, message: 'Por favor, ingresa un email válido.' };
+        errors.push('Por favor, ingresa un email válido.');
     }
     
+    // Validar teléfono
     if (!data.telefono || !isValidPhone(data.telefono)) {
-        return { isValid: false, message: 'Por favor, ingresa un teléfono válido.' };
+        errors.push('Por favor, ingresa un teléfono válido (mínimo 10 dígitos).');
     }
     
-    if (!data.mensaje) {
-        return { isValid: false, message: 'Por favor, escribe tu mensaje.' };
+    // Validar servicio
+    if (!data.servicio) {
+        errors.push('Por favor, selecciona un servicio.');
     }
     
-    return { isValid: true };
+    // Validar mensaje
+    if (!data.mensaje || data.mensaje.length < 10) {
+        errors.push('El mensaje debe tener al menos 10 caracteres.');
+    }
+    if (data.mensaje.length > 1000) {
+        errors.push('El mensaje no puede exceder 1000 caracteres.');
+    }
+    
+    // Validar contenido sospechoso
+    const suspiciousPatterns = [
+        /<script/i,
+        /javascript:/i,
+        /on\w+=/i,
+        /<iframe/i,
+        /<object/i,
+        /<embed/i
+    ];
+    
+    const allText = `${data.nombre} ${data.email} ${data.mensaje}`;
+    for (const pattern of suspiciousPatterns) {
+        if (pattern.test(allText)) {
+            errors.push('Se detectó contenido no permitido en el formulario.');
+            break;
+        }
+    }
+    
+    return {
+        isValid: errors.length === 0,
+        message: errors.length > 0 ? errors.join(' ') : ''
+    };
 }
 
+// Función mejorada para validar email
+function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    return emailRegex.test(email) && email.length <= 254;
+}
+
+// Función mejorada para validar teléfono
+function isValidPhone(phone) {
+    // Remover espacios, guiones y paréntesis para validación
+    const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
+    const phoneRegex = /^[\+]?[0-9]{10,15}$/;
+    return phoneRegex.test(cleanPhone);
+}
+
+// Función para limpiar formulario con confirmación
 function clearForm() {
-    document.getElementById('contactForm').reset();
+    const form = document.getElementById('contactForm');
+    if (form) {
+        form.reset();
+        // Limpiar mensajes de error si existen
+        const errorMessages = document.querySelectorAll('.form-message');
+        errorMessages.forEach(msg => msg.remove());
+    }
 }
 
+// Función mejorada para envío de email (simulado)
 function sendEmail(data) {
     return new Promise((resolve, reject) => {
-        // Simular envío de email
+        // Validación adicional del lado del servidor (simulada)
+        if (!data || typeof data !== 'object') {
+            reject(new Error('Datos inválidos'));
+            return;
+        }
+        
+        // Simular verificación de rate limiting
+        const lastSubmission = localStorage.getItem('lastFormSubmission');
+        const now = Date.now();
+        
+        if (lastSubmission && (now - parseInt(lastSubmission)) < 60000) { // 1 minuto
+            reject(new Error('Por favor espera un minuto antes de enviar otro mensaje.'));
+            return;
+        }
+        
+        // Guardar timestamp de envío
+        localStorage.setItem('lastFormSubmission', now.toString());
+        
+        // Simular envío de email con delay
         setTimeout(() => {
-            resolve();
-        }, 1000);
+            // Simular posible error de servidor (5% de probabilidad)
+            if (Math.random() < 0.05) {
+                reject(new Error('Error del servidor. Por favor, intenta nuevamente.'));
+            } else {
+                resolve({
+                    success: true,
+                    message: 'Email enviado correctamente',
+                    timestamp: new Date().toISOString()
+                });
+            }
+        }, 1500 + Math.random() * 1000); // 1.5-2.5 segundos
     });
 }
 
+// Función mejorada para generar mensaje de WhatsApp
 function generateWhatsAppMessage(data) {
-    return `Hola! Mi nombre es ${data.nombre}.
+    const message = `🏗️ *Solicitud de Cotización - Construcciones Erick*
 
-Email: ${data.email}
-Teléfono: ${data.telefono}
+👤 *Nombre:* ${data.nombre}
+📧 *Email:* ${data.email}
+📱 *Teléfono:* ${data.telefono}
+🔧 *Servicio:* ${data.servicio}
 
-Mensaje: ${data.mensaje}
+💬 *Mensaje:*
+${data.mensaje}
 
-¡Espero su respuesta!`;
+---
+_Enviado desde la página web oficial_`;
+
+    return message;
 }
 
 // Función para validar email
@@ -714,9 +821,13 @@ function showCurrentImage() {
     }
     
     if (modalInfo) {
+        // Sanitizar datos antes de mostrar para prevenir XSS
+        const safeLocation = sanitizeInput(currentItem.location || 'No especificada');
+        const safeDate = sanitizeInput(currentItem.date || 'No especificada');
+        
         modalInfo.innerHTML = `
-            <p><strong>Ubicación:</strong> ${currentItem.location || 'No especificada'}</p>
-            <p><strong>Fecha:</strong> ${currentItem.date || 'No especificada'}</p>
+            <p><strong>Ubicación:</strong> ${safeLocation}</p>
+            <p><strong>Fecha:</strong> ${safeDate}</p>
         `;
     }
     
