@@ -320,6 +320,23 @@ function clearForm() {
 }
 
 // Función mejorada para envío de email (simulado)
+// Configuración de EmailJS
+const EMAILJS_CONFIG = {
+    serviceID: 'TU_SERVICE_ID', // Reemplaza con tu Service ID
+    templateID: 'TU_TEMPLATE_ID', // Reemplaza con tu Template ID
+    publicKey: 'TU_PUBLIC_KEY' // Reemplaza con tu Public Key
+};
+
+// Inicializar EmailJS
+function initEmailJS() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+        console.log('EmailJS inicializado correctamente');
+    } else {
+        console.error('EmailJS no está disponible');
+    }
+}
+
 function sendEmail(data) {
     return new Promise((resolve, reject) => {
         // Validación adicional del lado del servidor (simulada)
@@ -337,22 +354,42 @@ function sendEmail(data) {
             return;
         }
         
-        // Guardar timestamp de envío
-        localStorage.setItem('lastFormSubmission', now.toString());
+        // Verificar si EmailJS está disponible
+        if (typeof emailjs === 'undefined') {
+            reject(new Error('Servicio de email no disponible. Intenta con WhatsApp.'));
+            return;
+        }
         
-        // Simular envío de email con delay
-        setTimeout(() => {
-            // Simular posible error de servidor (5% de probabilidad)
-            if (Math.random() < 0.05) {
-                reject(new Error('Error del servidor. Por favor, intenta nuevamente.'));
-            } else {
+        // Preparar datos para EmailJS
+        const templateParams = {
+            from_name: data.name,
+            from_email: data.email,
+            phone: data.phone,
+            service: data.service,
+            message: data.message,
+            to_name: 'Luis Maldonado', // Nombre del destinatario
+            reply_to: data.email
+        };
+        
+        // Enviar email usando EmailJS
+        emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
+            .then((response) => {
+                console.log('Email enviado exitosamente:', response);
+                
+                // Guardar timestamp de envío
+                localStorage.setItem('lastFormSubmission', now.toString());
+                
                 resolve({
                     success: true,
                     message: 'Email enviado correctamente',
-                    timestamp: new Date().toISOString()
+                    timestamp: new Date().toISOString(),
+                    response: response
                 });
-            }
-        }, 1500 + Math.random() * 1000); // 1.5-2.5 segundos
+            })
+            .catch((error) => {
+                console.error('Error al enviar email:', error);
+                reject(new Error('Error al enviar el email. Por favor, intenta nuevamente o usa WhatsApp.'));
+            });
     });
 }
 
@@ -479,6 +516,9 @@ if (whatsappBtn) {
 
 // Efectos visuales adicionales
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar EmailJS
+    initEmailJS();
+    
     // Efecto de escritura para el título principal
     const heroTitle = document.querySelector('.hero-text h1');
     if (heroTitle) {
