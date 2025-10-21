@@ -77,24 +77,38 @@ function initScrollEffects() {
     });
 }
 
+let formInitialized = false;
+const DISABLE_LEGACY_FORM_LISTENERS = true;
+
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     const whatsappBtn = document.getElementById('whatsappBtn');
 
     if (!contactForm || !whatsappBtn) return;
+    if (formInitialized) return;
+    formInitialized = true;
 
-    // Manejar envío del formulario
+    const publicSpan = document.getElementById('whatsappPublic');
+    if (publicSpan) publicSpan.textContent = 'Click para chatear';
+
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
         const data = getFormData();
         const validation = validateForm(data);
-        
+
         if (!validation.isValid) {
             showMessage(validation.message, 'error');
             return;
         }
-        
+        if (!data.consent) {
+            showMessage('Debes aceptar la Política de Privacidad.', 'error');
+            return;
+        }
+        if (!data.captchaToken || (Date.now() - (window.turnstileTimestamp || 0) > 120000)) {
+            showMessage('Por favor, valida que no eres un robot.', 'error');
+            return;
+        }
+
         try {
             showMessage('Enviando mensaje...', 'info');
             await sendEmail(data);
@@ -106,25 +120,40 @@ function initContactForm() {
         }
     });
 
-    // Manejar botón de WhatsApp
+    // Protección de WhatsApp
+    const OBFUSCATED_PHONE_B64 = 'NTY5NTQwOTQ1NjQ='; // 56954094564
+    let lastClickTs = 0;
+
     whatsappBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        const data = getFormData();
-        const validation = validateForm(data);
-        
-        if (!validation.isValid) {
-            showMessage(validation.message, 'error');
+
+        const now = Date.now();
+        if (now - lastClickTs < 5000) {
+            showMessage('Espera unos segundos antes de reintentar.', 'error');
             return;
         }
-        
-        const message = generateWhatsAppMessage(data);
-        const phoneNumber = '1234567890'; // Reemplazar con número real
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        
-        window.open(whatsappUrl, '_blank');
-        showMessage('Redirigiendo a WhatsApp...', 'success');
-        clearForm();
+
+        const consent = !!document.getElementById('consent')?.checked;
+        if (!consent) {
+            showMessage('Debes aceptar la Política de Privacidad.', 'error');
+            return;
+        }
+
+        if (!confirm('¿Deseas abrir el chat en WhatsApp?')) return;
+
+        const phoneNumber = atob(OBFUSCATED_PHONE_B64);
+        const presetMessage = 'Hola, me gustaría cotizar un proyecto.';
+        const userMessageInput = document.getElementById('mensaje');
+        const finalMessage = userMessageInput && userMessageInput.value.trim().length > 0
+            ? sanitizeInput(userMessageInput.value.trim())
+            : presetMessage;
+
+        lastClickTs = now;
+        setTimeout(() => {
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(finalMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            showMessage('Abriendo WhatsApp...', 'info');
+        }, 500);
     });
 }
 
@@ -213,26 +242,15 @@ document.querySelectorAll('.servicio-card, .galeria-item, .info-item').forEach(e
 const contactForm = document.getElementById('contactForm');
 const whatsappBtn = document.getElementById('whatsappBtn');
 
-// Funciones auxiliares para el formulario de contacto
-function getFormData() {
-    return {
-        nombre: sanitizeInput(document.getElementById('nombre').value.trim()),
-        email: sanitizeInput(document.getElementById('email').value.trim()),
-        telefono: sanitizeInput(document.getElementById('telefono').value.trim()),
-        servicio: sanitizeInput(document.getElementById('servicio').value),
-        mensaje: sanitizeInput(document.getElementById('mensaje').value.trim())
-    };
-}
-
 // Función para sanitizar inputs y prevenir XSS
 function sanitizeInput(input) {
     if (typeof input !== 'string') return '';
-    
     return input
-        .replace(/[<>]/g, '') // Remover < y >
-        .replace(/javascript:/gi, '') // Remover javascript:
-        .replace(/on\w+=/gi, '') // Remover event handlers
-        .replace(/script/gi, '') // Remover script tags
+        .replace(/[<>]/g, '')
+        .replace(/javascript:/gi, '')
+        .replace(/on\w+=/gi, '')
+        .replace(/script/gi, '')
+        .replace(/[^\x20-\x7EÀ-ÿ\n\r]/g, '') // elimina caracteres no imprimibles
         .trim();
 }
 
@@ -269,25 +287,14 @@ function validateForm(data) {
     if (data.mensaje.length > 1000) {
         errors.push('El mensaje no puede exceder 1000 caracteres.');
     }
-    
-    // Validar contenido sospechoso
-    const suspiciousPatterns = [
-        /<script/i,
-        /javascript:/i,
-        /on\w+=/i,
-        /<iframe/i,
-        /<object/i,
-        /<embed/i
-    ];
-    
-    const allText = `${data.nombre} ${data.email} ${data.mensaje}`;
-    for (const pattern of suspiciousPatterns) {
-        if (pattern.test(allText)) {
-            errors.push('Se detectó contenido no permitido en el formulario.');
-            break;
-        }
+    const allowedMsg = /^[A-Za-zÀ-ÿ0-9.,;:()\-@!?\s\n]+$/;
+    if (!allowedMsg.test(data.mensaje)) {
+        errors.push('Tu mensaje contiene caracteres no permitidos.');
     }
-    
+    if (!data.consent) {
+        errors.push('Debes aceptar la Política de Privacidad.');
+    }
+    // ... existing code ...
     return {
         isValid: errors.length === 0,
         message: errors.length > 0 ? errors.join(' ') : ''
@@ -322,9 +329,9 @@ function clearForm() {
 // Función mejorada para envío de email (simulado)
 // Configuración de EmailJS
 const EMAILJS_CONFIG = {
-    serviceID: 'TU_SERVICE_ID', // Reemplaza con tu Service ID
-    templateID: 'TU_TEMPLATE_ID', // Reemplaza con tu Template ID
-    publicKey: 'TU_PUBLIC_KEY' // Reemplaza con tu Public Key
+    serviceID: 'service_fgmp496', // Reemplaza con tu Service ID
+    templateID: 'template_jbczxk9', // Reemplaza con tu Template ID
+    publicKey: 'wNW5SJFQ-7W1oHpV_' // Reemplaza con tu Public Key
 };
 
 // Inicializar EmailJS
@@ -345,40 +352,58 @@ function sendEmail(data) {
             return;
         }
         
-        // Simular verificación de rate limiting
         const lastSubmission = localStorage.getItem('lastFormSubmission');
         const now = Date.now();
-        
-        if (lastSubmission && (now - parseInt(lastSubmission)) < 60000) { // 1 minuto
+        if (lastSubmission && (now - parseInt(lastSubmission)) < 60000) {
             reject(new Error('Por favor espera un minuto antes de enviar otro mensaje.'));
             return;
         }
         
-        // Verificar si EmailJS está disponible
         if (typeof emailjs === 'undefined') {
-            reject(new Error('Servicio de email no disponible. Intenta con WhatsApp.'));
+            reject(new Error('Servicio de email no disponible. Intenta nuevamente más tarde.'));
             return;
         }
-        
-        // Preparar datos para EmailJS
+
+        const isConfigured = EMAILJS_CONFIG &&
+            EMAILJS_CONFIG.serviceID && !EMAILJS_CONFIG.serviceID.includes('TU_') &&
+            EMAILJS_CONFIG.templateID && !EMAILJS_CONFIG.templateID.includes('TU_') &&
+            EMAILJS_CONFIG.publicKey && !EMAILJS_CONFIG.publicKey.includes('TU_');
+
+        if (!isConfigured) {
+            reject(new Error('Email no configurado. Completa SERVICE_ID, TEMPLATE_ID y PUBLIC_KEY.'));
+            return;
+        }
+
+        const companyName = 'Soluciones L. Maldonado';
+        const adminWhatsAppNumber = '56954094564';
+        const subject = `Nueva solicitud de cotización — ${data.servicio} — ${data.nombre}`;
+        const submittedAt = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });
+        const waText = `Hola, soy ${data.nombre}. Me interesa el servicio de ${data.servicio}. ${data.mensaje}`;
+        const whatsappLink = `https://wa.me/${adminWhatsAppNumber}?text=${encodeURIComponent(waText)}`;
+        const mailtoLink = `mailto:${data.email}?subject=${encodeURIComponent('Re: Cotización — ' + data.servicio)}&body=${encodeURIComponent(data.mensaje)}`;
+
         const templateParams = {
-            from_name: data.name,
+            subject,
+            company_name: companyName,
+            lead_source: 'Web - Formulario de Contacto',
+            submitted_at: submittedAt,
+
+            from_name: data.nombre,
             from_email: data.email,
-            phone: data.phone,
-            service: data.service,
-            message: data.message,
-            to_name: 'Luis Maldonado', // Nombre del destinatario
+            phone: data.telefono,
+            service: data.servicio,
+            message: data.mensaje,
+
+            whatsapp_link: whatsappLink,
+            mailto_link: mailtoLink,
+
+            to_name: 'Luis Maldonado',
             reply_to: data.email
         };
         
-        // Enviar email usando EmailJS
         emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
             .then((response) => {
-                console.log('Email enviado exitosamente:', response);
-                
-                // Guardar timestamp de envío
                 localStorage.setItem('lastFormSubmission', now.toString());
-                
                 resolve({
                     success: true,
                     message: 'Email enviado correctamente',
@@ -387,8 +412,7 @@ function sendEmail(data) {
                 });
             })
             .catch((error) => {
-                console.error('Error al enviar email:', error);
-                reject(new Error('Error al enviar el email. Por favor, intenta nuevamente o usa WhatsApp.'));
+                reject(new Error('Error al enviar el email. Por favor, intenta nuevamente.'));
             });
     });
 }
@@ -433,6 +457,7 @@ function showMessage(message, type = 'success') {
 
     const messageDiv = document.createElement('div');
     messageDiv.className = `form-message ${type}`;
+    messageDiv.setAttribute('role', 'alert');
     messageDiv.style.cssText = `
         padding: 1rem;
         margin: 1rem 0;
@@ -460,18 +485,15 @@ function showMessage(message, type = 'success') {
 }
 
 // Event listener para el envío del formulario por email
-if (contactForm) {
+if (!DISABLE_LEGACY_FORM_LISTENERS && contactForm) {
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
         const data = getFormData();
         const validation = validateForm(data);
-        
         if (!validation.isValid) {
             showMessage(validation.message, 'error');
             return;
         }
-
         try {
             showMessage('Enviando mensaje...', 'info');
             await sendEmail(data);
@@ -485,29 +507,20 @@ if (contactForm) {
 }
 
 // Event listener para el botón de WhatsApp
-if (whatsappBtn) {
+if (!DISABLE_LEGACY_FORM_LISTENERS && whatsappBtn) {
     whatsappBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        
         const data = getFormData();
         const validation = validateForm(data);
-        
         if (!validation.isValid) {
             showMessage(validation.message, 'error');
             return;
         }
-
         const whatsappMessage = generateWhatsAppMessage(data);
-        const phoneNumber = '573001234567'; // Número de WhatsApp (cambiar por el real)
+        const phoneNumber = '56954094564';
         const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-        
-        // Abrir WhatsApp en una nueva ventana
         window.open(whatsappURL, '_blank');
-        
-        // Mostrar mensaje de confirmación
         showMessage('Redirigiendo a WhatsApp...', 'success');
-        
-        // Limpiar formulario después de un breve delay
         setTimeout(() => {
             clearForm();
         }, 2000);
@@ -643,6 +656,8 @@ if (prefersReducedMotion.matches) {
 // Configuración de la galería - se carga desde JSON
 let galleryConfig = null;
 let galleryCollections = {};
+let projectMeta = {};
+let currentProjectMeta = null;
 
 let currentCollection = [];
 let currentImageIndex = 0;
@@ -657,35 +672,47 @@ async function loadGalleryConfig() {
         }
         galleryConfig = await response.json();
         
-        // Procesar la configuración para crear las colecciones por proyecto
+        // Procesar configuración
         galleryCollections = {};
-        
-        // Verificar que projects sea un array
+        projectMeta = {};
+
         if (Array.isArray(galleryConfig.projects)) {
             for (const project of galleryConfig.projects) {
+                if (!project || !project.id || !project.folder) continue;
+
+                // Guardar metadatos del proyecto
+                projectMeta[project.id] = {
+                    title: project.name,
+                    description: project.description,
+                    location: project.location,
+                    date: project.date
+                };
+
+                // Preparar colección de imágenes
                 galleryCollections[project.id] = [];
-                
-                // Verificar que el proyecto tenga imágenes
+
                 if (Array.isArray(project.images)) {
                     for (const image of project.images) {
+                        // Evitar imágenes sin filename
+                        if (!image || !image.filename) continue;
+
                         galleryCollections[project.id].push({
                             title: project.name,
                             description: project.description,
                             location: project.location,
                             date: project.date,
                             imageSrc: `./img/galeria/${project.folder}/${image.filename}`,
-                            alt: image.alt,
+                            alt: image.alt || project.name,
                             isMain: image.isMain || false
                         });
                     }
                 }
             }
         }
-        
+
         console.log('Configuración de galería cargada:', galleryCollections);
     } catch (error) {
         console.error('Error al cargar la configuración de la galería:', error);
-        // Fallback: crear colecciones vacías
         galleryCollections = {};
     }
 }
@@ -786,20 +813,24 @@ function openGalleryModal(projectId) {
     const modalTitle = document.getElementById('modalTitle');
     
     currentCollection = galleryCollections[projectId] || [];
-    currentImageIndex = 0;
+    currentProjectMeta = projectMeta[projectId] || null;
 
-    // Configurar título con el nombre del proyecto
+    // Seleccionar imagen principal si existe
+    const mainIndex = currentCollection.findIndex(item => item.isMain);
+    currentImageIndex = mainIndex >= 0 ? mainIndex : 0;
+
+    // Título del proyecto
     if (currentCollection.length > 0) {
         modalTitle.textContent = currentCollection[0].title;
+    } else if (currentProjectMeta && currentProjectMeta.title) {
+        modalTitle.textContent = currentProjectMeta.title;
     } else {
         modalTitle.textContent = 'Galería de Proyectos';
     }
 
-    // Mostrar modal
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 
-    // Cargar imágenes
     loadModalImages();
     showCurrentImage();
 }
@@ -853,25 +884,35 @@ function showCurrentImage() {
     }
     
     if (modalTitle) {
-        modalTitle.textContent = currentItem.title;
+        modalTitle.textContent = currentItem.title || (currentProjectMeta && currentProjectMeta.title) || 'Proyecto';
     }
     
     if (modalDescription) {
-        modalDescription.textContent = currentItem.description;
+        const desc = (currentItem.description && currentItem.description.trim().length > 0)
+            ? currentItem.description
+            : (currentProjectMeta && currentProjectMeta.description) || 'Descripción no disponible';
+        modalDescription.textContent = desc;
     }
     
     if (modalInfo) {
-        // Sanitizar datos antes de mostrar para prevenir XSS
-        const safeLocation = sanitizeInput(currentItem.location || 'No especificada');
-        const safeDate = sanitizeInput(currentItem.date || 'No especificada');
-        
+        const safeLocation = sanitizeInput(
+            (currentItem.location && currentItem.location.trim().length > 0)
+                ? currentItem.location
+                : (currentProjectMeta && currentProjectMeta.location) || 'No especificada'
+        );
+        const safeDate = sanitizeInput(
+            (currentItem.date && currentItem.date.trim && currentItem.date.trim().length > 0)
+                ? currentItem.date
+                : (currentProjectMeta && currentProjectMeta.date) || 'No especificada'
+        );
         modalInfo.innerHTML = `
             <p><strong>Ubicación:</strong> ${safeLocation}</p>
             <p><strong>Fecha:</strong> ${safeDate}</p>
         `;
+        // Asegurar que el panel esté visible
+        modalInfo.parentElement && (modalInfo.parentElement.style.display = 'block');
     }
     
-    // Actualizar thumbnails activos
     const thumbnails = document.querySelectorAll('.modal-thumbnail');
     thumbnails.forEach((thumb, index) => {
         thumb.classList.toggle('active', index === currentImageIndex);

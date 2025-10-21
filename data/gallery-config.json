@@ -312,13 +312,10 @@
       "id": "instalacion-Cocina",
       "name": "Instalacion Cocina a Cañeria",
       "description": "Instalación de Cocina a Cañeria en sistema de gas para domicilio.",
-      "category": "Construcción",
-      "location": "Hogar residencial",
-      "date": "2025",
-      "folder": "InstalacionCocinaaCañeria",
+      "folder": "InstalacionCocinaCañeria",
       "images": [
         {
-          "filename": "InstalacionCocinaaCañeria.jpeg",
+          "filename": "InstalacionCocinaaCaneria.jpeg",
           "alt": "Vista principal de la instalacion de cocina a cañeria",
           "isMain": true
         }

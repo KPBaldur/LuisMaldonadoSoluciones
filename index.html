@@ -8,8 +8,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://challenges.cloudflare.com; connect-src 'self' https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          rel="stylesheet"
+          integrity="REEMPLAZAR_CON_HASH_SRI"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+    <!-- Cloudflare Turnstile (invisible) -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <!-- EmailJS SDK con SRI y defer -->
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+            defer
+            integrity="REEMPLAZAR_CON_HASH_SRI"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <!-- Header y Navegación -->
@@ -174,7 +188,6 @@
                     <h3>Certificación y Seguridad</h3>
                     <p>Nuestros servicios están respaldados por gasfitería profesional certificado ante la Superintendencia de Electricidad y Combustibles (SEC), garantizando seguridad y cumplimiento normativo.</p>
                     <div class="sec-info">
-                        <span class="sec-registry">Registro SEC Nº 123456789</span>
                         <a href="https://wlhttp.sec.cl/validadorInstaladores" target="_blank" rel="noopener noreferrer" class="sec-verify-link">
                             <i class="fas fa-external-link-alt"></i>
                             Verificar certificación en SEC
@@ -241,7 +254,7 @@
                     </div>
                 </div>
 
-                <div class="galeria-item" data-project="instalacion-torre-de-agua">
+                <div class="galeria-item" data-project="construccion-torre-de-agua">
                     <img src="img/galeria/InstalacionTorredeAgua/InstalacionTorredeAgua.jpeg" alt="Instalacion Torre de Agua" class="galeria-preview">
                     <div class="galeria-overlay">
                         <h4>Construccion Torre de Agua</h4>
@@ -266,7 +279,7 @@
                 </div>
 
                 <div class="galeria-item" data-project="instalacion-Cocina">
-                    <img src="img/galeria/InstalacionCocinaCañeria/InstalacionCocinaaCañeria.jpeg" alt="Instalacion Cocina a Cañeria" class="galeria-preview">
+                    <img src="img/galeria/InstalacionCocinaCañeria/InstalacionCocinaaCaneria.jpeg" alt="Instalacion Cocina a Cañeria" class="galeria-preview">
                     <div class="galeria-overlay">
                         <h4>Instalacion Cocina a Cañeria</h4>
                         <p>Instalación de Cocina a Cañeria en sistema de gas para domicilio.</p>
@@ -318,7 +331,7 @@
                         <i class="fab fa-whatsapp"></i>
                         <div>
                             <h4>WhatsApp</h4>
-                            <p>+56 9 5409 4564</p>
+                            <p><span id="whatsappPublic">WhatsApp disponible</span></p>
                         </div>
                     </div>
                 </div>
@@ -357,6 +370,21 @@
                         <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto" 
                                   rows="5" required minlength="10" maxlength="1000"
                                   title="Describe tu proyecto (10-1000 caracteres)"></textarea>
+                    </div>
+                    <div class="form-group consent-group">
+                        <label class="consent-label">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            Acepto la Política de Privacidad y que seré redirigido a WhatsApp (sujeto a las políticas de Meta).
+                        </label>
+                        <a href="#politica-privacidad" class="privacy-link-btn" title="Leer Política de Privacidad">
+                            <i class="fas fa-shield-alt"></i> Ver Política
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <div id="cf-turnstile" class="cf-turnstile"
+                             data-sitekey="1x00000000000000000000AA"
+                             data-action="contact"
+                             data-callback="onTurnstileToken"></div>
                     </div>
                     <div class="form-buttons">
                         <button type="submit" class="btn btn-primary">
@@ -413,3 +441,12 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+<section id="politica-privacidad" class="privacy-policy">
+    <div class="container">
+        <h3>Política de Privacidad</h3>
+        <p>No almacenamos datos personales innecesarios. El formulario se usa únicamente para contacto por email. 
+        Si eliges WhatsApp, serás redirigido a la plataforma y tu interacción quedará sujeta a las políticas de Meta. 
+        Puedes solicitar que eliminemos tu información de contacto en cualquier momento.</p>
+    </div>
+</section>
